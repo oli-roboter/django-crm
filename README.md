@@ -2,7 +2,7 @@
 
 ## Summary
 
-This is a learning project using the Django python framework connected to a postgres database running in docker and following the [Django Project – Code a CRM App Tutorial](https://www.youtube.com/watch?v=t10QcFx7d5k) youtube video.
+This is a learning project using the Django python framework connected to a postgres database running in docker and based on the [Django Project – Code a CRM App Tutorial](https://www.youtube.com/watch?v=t10QcFx7d5k) youtube video.
 
 ---
 
@@ -32,12 +32,22 @@ Make sure you have docker installed and run `docker-compose up -d` to start a po
 2. Go to the `DATABASES` section of the file and
    1. Configure the databases object for the database you're using (postgresql in this case)
    2. Add your application name to the `INSTALLED_APPS` object (`website` in this example)
-3. In the same foldera as where the `manage.py` file is, run `python manage.py migrate`. This will add all the django tables and other stuff into the database
+
+### Migrating the django database data
+
+3. In the same foldera as where the `manage.py` file is, run `python manage.py migrate`. This will add all the default django tables and other stuff into the database
+4. After the database model is created or updated in the `crm/website/models.py` file, a new migratiomn file will have to be created through the `python manage.py makemigrations` command.
+5. To push the migration to the database, the `python manage.py migrate` command has to be executed again.
+6. Register the database model in the `crm/website/admin.py` file
 
 ### Create a superuser
 
 Type `python manage.py createsuperuser` to create a superuser. Follow the instructions on the prompt (recommended user name is `admin`)
 
+The django app has a default admin screen at `localhost:8000/admin` where you can look and edit users, groups and permissions
+
 ---
 
-## Next...
+## Run the application in dev mode
+
+In the terminal type `python manage.py runserver` from the folder where `manage.py` file is located and the development server will be started and you can visit the site in `http://localhost:8000`
